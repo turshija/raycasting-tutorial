@@ -4,7 +4,7 @@ import config from '../config';
 export class Player {
   angle = null;
 
-  fov = null;
+  // fov = null;
 
   halfFov = null;
 
@@ -67,10 +67,6 @@ export class Player {
     if (this.isColiding(checkX, Math.floor(this.y))) {
       this.x = newX;
     }
-    // if (this.isColiding(newX, newY)) {
-    //   this.x = newX;
-    //   this.y = newY;
-    // }
   }
 
   turnLeft() {

@@ -1,6 +1,6 @@
 import config from '../config';
 import { clearscreen } from '../utils/canvas';
-import { raycasting } from './raycasting';
+import { Raycasting } from './Raycasting';
 import { Player } from './Player';
 import { Textures } from './Textures';
 
@@ -11,6 +11,7 @@ export const main = async (screen) => {
 
   const player = new Player(config.player);
   const textures = new Textures();
+  const raycasting = new Raycasting({ context: screenContext, player, textures });
   await textures.loadAll();
 
   const pressedKeys = {};
@@ -24,7 +25,7 @@ export const main = async (screen) => {
     pressedKeys[config.key.right] && player.turnRight();
 
     clearscreen(screenContext, config.projection);
-    raycasting(screenContext, player, textures);
+    raycasting.renderFrame();
     requestAnimationFrame(doLogic);
   }
   requestAnimationFrame(doLogic);
