@@ -14,7 +14,7 @@ export const drawTexture = (context, x, y, wallHeight, texturePositionX, texture
   const yIncrementer = (wallHeight * 2) / texture.height;
 
   for(let i = 0; i < texture.height; i++) {
-    if(texture.id) {
+    if(texture.data) {
       context.strokeStyle = texture.data[texturePositionX + i * texture.width];
     } else {
       context.strokeStyle = texture.colors[texture.bitmap[i][texturePositionX]];

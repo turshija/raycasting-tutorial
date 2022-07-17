@@ -46,13 +46,14 @@ export default {
     [2,0,0,2,2,0,2,0,0,2],
     [2,0,0,2,0,0,2,0,0,2],
     [2,0,0,2,0,0,2,0,0,2],
-    [2,0,0,2,0,2,2,0,0,2],
+    [2,0,0,1,0,2,2,0,0,2],
     [2,0,0,0,0,0,0,0,0,2],
     [2,0,0,0,0,0,0,0,0,2],
-    [2,2,2,2,2,2,2,2,2,2],
+    [2,1,1,2,1,2,1,2,2,2],
   ],
   textures: [
     {
+      id: 1,
       width: 8,
       height: 8,
       bitmap: [
@@ -73,8 +74,9 @@ export default {
     {
       width: 16,
       height: 16,
-      id: "texture",
-      data: getTextureData({ width: 16, height: 16, id: "texture" })
+      id: 2,
+      name: "wall",
+      file: "wall.png"
     }
   ],
   key: {

@@ -13,6 +13,19 @@ module.exports = (env = {}) => {
       index: './src/index.js'
     },
 
+    module: {
+      rules: [
+        {
+          test: /\.(png|jpe?g|gif)$/i,
+          use: [
+            {
+              loader: 'file-loader',
+            },
+          ],
+        },
+      ],
+    },
+
     devServer: {
       host: '0.0.0.0',
       port: 1337,

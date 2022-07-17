@@ -12,6 +12,4 @@ function component() {
 const screen = component();
 document.body.appendChild(screen);
 
-window.onload = function() {
-  main(screen);
-}
+main(screen);

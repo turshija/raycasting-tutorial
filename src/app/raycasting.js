@@ -2,7 +2,7 @@ import config from '../config';
 import { drawLine, drawTexture } from '../utils/canvas';
 import { degreeToRadians } from '../utils/common';
 
-export const raycasting = (context, player) => {
+export const raycasting = (context, player, textures) => {
   let rayAngle = player.angle - player.halfFov;
 
   for (let rayCount = 0; rayCount < config.projection.width; rayCount++) {
@@ -33,11 +33,10 @@ export const raycasting = (context, player) => {
     const wallHeight = Math.floor(config.projection.halfHeight / distance);
 
     // Get texture
-    const texture = config.textures[wall - 1];
+    const texture = textures.get(wall);
 
     // Calcule texture position
     const texturePositionX = Math.floor((texture.width * (ray.x + ray.y)) % texture.width);
-
 
     // Draw
     drawLine(context, rayCount, 0, rayCount, config.projection.halfHeight - wallHeight, "black");

@@ -2,12 +2,16 @@ import config from '../config';
 import { clearscreen } from '../utils/canvas';
 import { raycasting } from './raycasting';
 import { Player } from './Player';
+import { Textures } from './Textures';
 
-export const main = (screen) => {
+export const main = async (screen) => {
   const screenContext = screen.getContext("2d");
   screenContext.scale(config.screen.scale, config.screen.scale);
   config.screen.scale === 1 && screenContext.translate(0.5, 0.5);
+
   const player = new Player(config.player);
+  const textures = new Textures();
+  await textures.loadAll();
 
   const pressedKeys = {};
   document.addEventListener('keydown', ({ code }) => pressedKeys[code] = true);
@@ -20,7 +24,7 @@ export const main = (screen) => {
     pressedKeys[config.key.right] && player.turnRight();
 
     clearscreen(screenContext, config.projection);
-    raycasting(screenContext, player);
+    raycasting(screenContext, player, textures);
     requestAnimationFrame(doLogic);
   }
   requestAnimationFrame(doLogic);
