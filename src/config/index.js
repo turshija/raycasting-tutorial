@@ -83,7 +83,21 @@ export default {
       id: "background",
       name: "Background",
       file: "background.png"
-    }
+    },
+    {
+      width: 16,
+      height: 16,
+      id: 'test_floor',
+      name: "Test Floor",
+      file: "test_floor.png"
+    },
+    {
+      width: 16,
+      height: 16,
+      id: 'floor',
+      name: "Grass Floor",
+      file: "floor.png"
+    },
   ],
   key: {
     up: "KeyW",

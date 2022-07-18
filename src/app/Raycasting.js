@@ -56,15 +56,14 @@ export class Raycasting {
       // Get texture
       const texture = this.textures.get(wall);
       const backgroundTexture = this.textures.get('background');
-
+      const floorTexture = this.textures.get('floor');
       // Calcule texture position
       const texturePositionX = Math.floor((texture.width * (ray.x + ray.y)) % texture.width);
 
       // Draw
-      // this.drawLine(rayCount, 0, config.projection.halfHeight - wallHeight, new Color(0, 0, 0, 255));
       this.drawBackground(rayCount, 0, config.projection.halfHeight - wallHeight, backgroundTexture);
       this.drawTexture(rayCount, config.projection.halfHeight - wallHeight, wallHeight, texturePositionX, texture);
-      this.drawLine(rayCount, config.projection.halfHeight + wallHeight, config.projection.height, new Color(95, 87, 79, 255));
+      this.drawFloor(rayCount, wallHeight, rayAngle, floorTexture)
     }
 
     this.renderBuffer();
@@ -85,6 +84,35 @@ export class Raycasting {
       const textureY = Math.floor(y % background.height);
       const color = background.data[textureX + textureY * background.width];
       this.drawPixel(x, y, color);
+    }
+  }
+
+  drawFloor(x1, wallHeight, rayAngle, texture) {
+    const start = config.projection.halfHeight + wallHeight + 1;
+    const directionCos = Math.cos(degreeToRadians(rayAngle))
+    const directionSin = Math.sin(degreeToRadians(rayAngle))
+    for(let y = start; y < config.projection.height; y++) {
+      // Create distance and calculate it
+      let distance = config.projection.height / (2 * y - config.projection.height)
+      distance /= Math.cos(degreeToRadians(this.player.angle) - degreeToRadians(rayAngle)) // Inverse fisheye fix
+
+      // Get the tile position
+      let tilex = distance * directionCos
+      let tiley = distance * directionSin
+      tilex += this.player.x
+      tiley += this.player.y
+      const tile = config.map[Math.floor(tiley)][Math.floor(tilex)]
+
+      if (tile !== 0) {
+        continue;
+      }
+
+      const texture_x = (Math.floor(tilex * texture.width)) % texture.width
+      const texture_y = (Math.floor(tiley * texture.height)) % texture.height
+
+      // Get pixel color
+      const color = texture.data[texture_x + texture_y * texture.width];
+      this.drawPixel(x1, y, color)
     }
   }
 
