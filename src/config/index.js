@@ -1,10 +1,12 @@
-import { getTextureData } from '../utils/canvas';
+import { Color } from '../app/Color';
 
 const WIDTH = 640;
 const HEIGHT = 480;
 const FOV = 60;
 const PRECISION = 64;
 const SCALE = 1;
+const PROJECTION_WIDTH = WIDTH / SCALE;
+const PROJECTION_HEIGHT = HEIGHT / SCALE;
 
 export default {
   screen: {
@@ -15,10 +17,10 @@ export default {
     scale: SCALE
   },
   projection: {
-    width: WIDTH / SCALE,
-    height: HEIGHT / SCALE,
-    halfWidth: (WIDTH / SCALE) / 2,
-    halfHeight: (HEIGHT / SCALE) / 2
+    width: PROJECTION_WIDTH,
+    height: PROJECTION_HEIGHT,
+    halfWidth: PROJECTION_WIDTH / 2,
+    halfHeight: PROJECTION_HEIGHT / 2
   },
   rayCasting: {
     incrementAngle: FOV / (WIDTH / SCALE),
@@ -32,8 +34,8 @@ export default {
     radius: 10,
     angle: 90,
     speed: {
-      movement: 0.05,
-      rotation: 1.5
+      movement: 0.03,
+      rotation: 1.1
     }
   },
   map: [
@@ -64,8 +66,8 @@ export default {
         [0,1,0,0,0,1,0,0]
       ],
       colors: [
-        "rgb(255, 241, 232)",
-        "rgb(194, 195, 199)",
+        new Color(255, 241, 232, 255),
+        new Color(194, 195, 199, 255)
       ]
     },
     {

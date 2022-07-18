@@ -1,4 +1,5 @@
 import config from '../config';
+import { Color } from './Color';
 
 export class Textures {
   loaded = {}
@@ -37,7 +38,7 @@ export class Textures {
   parseImageData(imageData) {
     const colorArray = [];
     for (let i = 0; i < imageData.length; i += 4) {
-      colorArray.push(`rgb(${imageData[i]},${imageData[i + 1]},${imageData[i + 2]})`);
+      colorArray.push(new Color(imageData[i], imageData[i + 1], imageData[i + 2], 255));
     }
     return colorArray;
   }
