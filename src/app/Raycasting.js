@@ -55,12 +55,14 @@ export class Raycasting {
 
       // Get texture
       const texture = this.textures.get(wall);
+      const backgroundTexture = this.textures.get('background');
 
       // Calcule texture position
       const texturePositionX = Math.floor((texture.width * (ray.x + ray.y)) % texture.width);
 
       // Draw
-      this.drawLine(rayCount, 0, config.projection.halfHeight - wallHeight, new Color(0, 0, 0, 255));
+      // this.drawLine(rayCount, 0, config.projection.halfHeight - wallHeight, new Color(0, 0, 0, 255));
+      this.drawBackground(rayCount, 0, config.projection.halfHeight - wallHeight, backgroundTexture);
       this.drawTexture(rayCount, config.projection.halfHeight - wallHeight, wallHeight, texturePositionX, texture);
       this.drawLine(rayCount, config.projection.halfHeight + wallHeight, config.projection.height, new Color(95, 87, 79, 255));
     }
@@ -74,6 +76,16 @@ export class Raycasting {
     canvas.height = config.projection.height;
     canvas.getContext('2d').putImageData(this.imageData, 0, 0);
     this.context.drawImage(canvas, 0, 0);
+  }
+
+  drawBackground(x, y1, y2, background) {
+    const offset = (this.player.angle + x);
+    for(let y = y1; y < y2; y++) {
+      const textureX = Math.floor(offset % background.width);
+      const textureY = Math.floor(y % background.height);
+      const color = background.data[textureX + textureY * background.width];
+      this.drawPixel(x, y, color);
+    }
   }
 
   drawPixel(x, y, color) {

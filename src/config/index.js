@@ -76,6 +76,13 @@ export default {
       id: 2,
       name: "wall",
       file: "wall.png"
+    },
+    {
+      width: 360,
+      height: 60,
+      id: "background",
+      name: "Background",
+      file: "background.png"
     }
   ],
   key: {
