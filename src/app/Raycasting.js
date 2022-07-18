@@ -14,9 +14,11 @@ export class Raycasting {
   }
 
   renderFrame() {
-    let rayAngle = this.player.angle - this.player.halfFov;
-
-    for (let rayCount = 0; rayCount < config.projection.width; rayCount++) {
+    for (
+      let rayCount = 0, rayAngle = this.player.angle - this.player.halfFov;
+      rayCount < config.projection.width;
+      rayCount++, rayAngle += config.rayCasting.incrementAngle
+    ) {
       const ray = {
         x: this.player.x,
         y: this.player.y
@@ -53,9 +55,6 @@ export class Raycasting {
       drawLine(this.context, rayCount, 0, rayCount, config.projection.halfHeight - wallHeight, "black");
       drawTexture(this.context, rayCount, config.projection.halfHeight - wallHeight, wallHeight, texturePositionX, texture);
       drawLine(this.context, rayCount, config.projection.halfHeight + wallHeight, rayCount, config.projection.height, "rgb(95, 87, 79)");
-
-      // Increment
-      rayAngle += config.rayCasting.incrementAngle;
     }
   }
 }

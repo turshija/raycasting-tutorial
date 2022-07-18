@@ -14,9 +14,6 @@ export default {
     halfHeight: HEIGHT / 2,
     scale: SCALE
   },
-  render: {
-    delay: 30
-  },
   projection: {
     width: WIDTH / SCALE,
     height: HEIGHT / SCALE,
