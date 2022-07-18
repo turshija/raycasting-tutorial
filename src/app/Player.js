@@ -71,6 +71,9 @@ export class Player {
 
   turnLeft() {
     this.angle -= this.speed.rotation;
+    if(this.angle < 0) {
+      this.angle += 360;
+    }
     this.angle %= 360;
   }
 
